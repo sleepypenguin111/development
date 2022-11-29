@@ -16,6 +16,7 @@ const App = () => {
   const [intelligence, setIntelligence] = useState(false);
   const [friend, setFriend] = useState(false);
   const [gentle, setGentle] = useState(false);
+  const [under1000, setUnder1000] = useState(false);
 
   const onAdd = (dog) => {
     const exist = cartItems.find((x) => x.breed === dog.breed);
@@ -60,6 +61,8 @@ const App = () => {
       setFriend(!friend);
     } else if (feature === "Gentle") {
       setGentle(!gentle);
+    } else if (feature === "under1000") {
+      setUnder1000(!under1000);
     }
   };
 
@@ -93,13 +96,17 @@ const App = () => {
       );
     }
 
+    if (under1000) {
+      sortedDogs = sortedDogs.filter((dog) => dog.price < 1000);
+    }
+
     if (isSorted) {
       sortedDogs = [...sortedDogs].sort((a, b) => {
         return a.price > b.price ? 1 : -1;
       });
     }
     setDogs(sortedDogs);
-  }, [isSorted, friend, intelligence, gentle, originalDogs]);
+  }, [isSorted, friend, intelligence, gentle, under1000, originalDogs]);
   return (
     <div className="App">
       <h1 className="text-5xl font-bold my-8">Welcome to the Dog Store !!</h1>
@@ -159,6 +166,23 @@ const App = () => {
                 Friendly
               </label>
             </div>
+
+            <h2 className="mt-10 text-blue-500 text-3xl font-bold flex flex-col">
+              Price:
+            </h2>
+            <div class="flex justify-center mt-4 flex items-center mb-4">
+              <input
+                id="default-checkbox"
+                type="checkbox"
+                value=""
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                onChange={() => onFilter("under1000")}
+              />
+              <label for="default-checkbox" class="text-lg ml-2">
+                Under $1000
+              </label>
+            </div>
+
             <h2 className="mt-10 text-blue-500 text-3xl font-bold flex flex-col">
               Sort By:
             </h2>
