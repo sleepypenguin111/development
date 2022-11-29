@@ -4,7 +4,7 @@ const Cart = (props) => {
   const { cartItems, onAdd, onRemove, total } = props;
   return (
     <div className="py-4">
-      <h2 className="mt-10 text-blue-500 text-3xl font-bold flex flex-col">Cart</h2>
+      <h2 className="mt-10 my-4 text-blue-500 text-3xl font-bold flex flex-col mr-3">Cart: </h2>
       <div>
         {cartItems.length === 0 && <div>Cart is Empty</div>}
         {cartItems.map((item) => (
@@ -20,7 +20,7 @@ const Cart = (props) => {
             </button>
           </div>
         ))}
-        <div>Total Cost: ${total}</div>
+        <div className="text-2xl">Total Cost: ${total}</div>
       </div>
     </div>
   );
